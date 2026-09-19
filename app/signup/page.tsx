@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { Suspense, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mail } from "lucide-react";
@@ -9,6 +9,20 @@ import Header from "../components/Header";
 import QuickLinksBar from "../components/QuickLinksBar";
 
 export default function SignUpPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen flex items-center justify-center bg-white">
+          <p className="text-sm text-gray-500">Loading...</p>
+        </main>
+      }
+    >
+      <SignUpContent />
+    </Suspense>
+  );
+}
+
+function SignUpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/welcome";
