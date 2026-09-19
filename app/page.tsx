@@ -1,69 +1,87 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Truck, Package, ShieldCheck, Clock, Users, MapPin } from "lucide-react";
+import Header from "./components/Header";
+import QuickLinksBar from "./components/QuickLinksBar";
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-white text-black">
+      <Header showHamburger />
+
+      {/* Hero */}
+      <section className="max-w-xl mx-auto px-6 pt-16 pb-10">
+        <h1 className="text-3xl font-semibold leading-tight mb-3">
+          Move goods.
+          <br />
+          Deliver with
+          <br />
+          <span className="text-green-700">confidence.</span>
+        </h1>
+        <p className="text-sm text-gray-600 mb-8 max-w-xs">
+          Reliable logistics and courier services connecting customers with
+          drivers.
+        </p>
+
+        <p className="text-sm font-medium mb-3">What are you here to do?</p>
+
+        <div className="flex flex-col sm:flex-row gap-3 mb-2">
+          <Link
+            href="/onboarding"
+            className="flex-1 bg-green-50 border border-green-100 rounded-lg p-4 hover:bg-green-100 transition"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Truck size={24} className="text-green-700 mb-2" />
+            <p className="text-base font-medium mb-1">I am a driver</p>
+            <p className="text-xs text-green-800">
+              Earn by delivering with us →
+            </p>
+          </Link>
+          <div className="flex-1 bg-orange-50 border border-orange-100 rounded-lg p-4 opacity-70 cursor-not-allowed">
+            <Package size={24} className="text-orange-600 mb-2" />
+            <p className="text-base font-medium mb-1">I am a customer</p>
+            <p className="text-xs text-orange-800">Send or receive deliveries</p>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Collapsible quick links */}
+      <QuickLinksBar defaultOpen />
+
+      {/* Why choose us */}
+      <section className="max-w-xl mx-auto px-6 py-16 text-center">
+        <h2 className="text-xl font-semibold mb-2">Why choose TakeOFF?</h2>
+        <p className="text-sm text-gray-600 mb-10">
+          We make logistics simple, fast and reliable for everyone.
+        </p>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          <Feature icon={<ShieldCheck size={20} className="text-green-700" />} bg="bg-green-50" title="Safe and secure" desc="Your parcels and info are protected" />
+          <Feature icon={<Clock size={20} className="text-orange-600" />} bg="bg-orange-50" title="Fast delivery" desc="On time, every time" />
+          <Feature icon={<Users size={20} className="text-green-700" />} bg="bg-green-50" title="Trusted drivers" desc="Verified and professional" />
+          <Feature icon={<MapPin size={20} className="text-orange-600" />} bg="bg-orange-50" title="Real-time tracking" desc="Know where your package is" />
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function Feature({
+  icon,
+  bg,
+  title,
+  desc,
+}: {
+  icon: React.ReactNode;
+  bg: string;
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div>
+      <div className={`w-11 h-11 rounded-full ${bg} flex items-center justify-center mx-auto mb-2`}>
+        {icon}
+      </div>
+      <p className="text-sm font-medium mb-1">{title}</p>
+      <p className="text-xs text-gray-500">{desc}</p>
     </div>
   );
 }
