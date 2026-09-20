@@ -214,6 +214,14 @@ function OnboardingContent() {
       </header>
 
       <section className="max-w-4xl mx-auto px-6 py-10">
+        <div className="flex justify-end mb-4">
+          <Link
+            href="/application-status"
+            className="text-sm text-green-700 font-medium border border-green-200 bg-green-50 px-3 py-1.5 rounded-md hover:bg-green-100 transition"
+          >
+            Check application status
+          </Link>
+        </div>
         <div className="mb-6">
           <span className="inline-block bg-green-50 text-green-800 text-xs font-semibold px-3 py-1 rounded-full mb-3">
             Step {step} of {TOTAL_STEPS}
